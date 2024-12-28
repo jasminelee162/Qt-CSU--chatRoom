@@ -14,7 +14,6 @@
 #include<QSqlDatabase>
 #include<findpwd.h>
 #include<messageme.h>
-#include <list.h>
 
 
 
@@ -55,8 +54,6 @@ private:
     QSqlDatabase dp;
     User users;
     login *llg;
-
-    QPixmap pix;
 };
 
 #endif // LOGIN_H

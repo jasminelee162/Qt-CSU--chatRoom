@@ -6,40 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>820</height>
+    <width>500</width>
+    <height>420</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1000</width>
-    <height>820</height>
+    <width>500</width>
+    <height>420</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>16777215</width>
-    <height>16777215</height>
+    <width>500</width>
+    <height>420</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string/>
+   <string notr="true">background-image: url(:/images/20220808141751.jpg);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <property name="minimumSize">
-    <size>
-     <width>1000</width>
-     <height>820</height>
-    </size>
-   </property>
    <widget class="QPushButton" name="btton">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>410</y>
+      <x>100</x>
+      <y>370</y>
       <width>300</width>
       <height>35</height>
      </rect>
@@ -66,15 +60,11 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>360</y>
-      <width>131</width>
-      <height>41</height>
+      <x>140</x>
+      <y>310</y>
+      <width>111</width>
+      <height>31</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(135, 135, 135);
-</string>
     </property>
     <property name="text">
      <string>注册账号</string>
@@ -86,42 +76,42 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>230</y>
-      <width>91</width>
-      <height>81</height>
+      <x>110</x>
+      <y>210</y>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string/>
+     <string notr="true">background-image: url(:/images/cmanc.jpg);</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/new/prefix1/new_image/login.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>310</y>
-      <width>51</width>
-      <height>51</height>
+      <x>110</x>
+      <y>260</y>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string/>
+     <string notr="true">image: url(:/images/20220808084621.png);</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/new/prefix1/new_image/I(1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLineEdit" name="password">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>320</y>
+      <x>160</x>
+      <y>260</y>
       <width>221</width>
-      <height>41</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -132,10 +122,10 @@ border-bottom:1px solid rgb(217, 217, 217)</string>
    <widget class="QLineEdit" name="username">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>250</y>
+      <x>160</x>
+      <y>210</y>
       <width>221</width>
-      <height>41</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -143,17 +133,69 @@ border-bottom:1px solid rgb(217, 217, 217)</string>
 border-bottom:1px solid rgb(217, 217, 217)</string>
     </property>
    </widget>
-   <widget class="QLabel" name="touxiang">
+   <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>170</y>
-      <width>121</width>
-      <height>71</height>
+      <x>-10</x>
+      <y>0</y>
+      <width>511</width>
+      <height>151</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string/>
+     <string notr="true">
+border-image: url(:/images/20220809104550.png);</string>
+    </property>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>0</y>
+       <width>51</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: url(:/images/closec.jpg);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>0</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: url(:/images/ZHX_.jpg);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="touxiang">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>90</y>
+      <width>151</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/images/20220808164925.jpg);</string>
     </property>
     <property name="text">
      <string/>
@@ -162,14 +204,11 @@ border-bottom:1px solid rgb(217, 217, 217)</string>
    <widget class="QPushButton" name="pushButton_5">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>360</y>
-      <width>131</width>
-      <height>41</height>
+      <x>270</x>
+      <y>310</y>
+      <width>121</width>
+      <height>28</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(135, 135, 135);</string>
     </property>
     <property name="text">
      <string>找回密码</string>
@@ -178,68 +217,6 @@ border-bottom:1px solid rgb(217, 217, 217)</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>190</y>
-      <width>31</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(0, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>✘</string>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>190</y>
-      <width>31</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(0, 0, 0);</string>
-    </property>
-    <property name="text">
-     <string>－</string>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="whiteGround">
-    <property name="geometry">
-     <rect>
-      <x>-30</x>
-      <y>0</y>
-      <width>841</width>
-      <height>681</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <zorder>whiteGround</zorder>
-   <zorder>btton</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
-   <zorder>password</zorder>
-   <zorder>username</zorder>
-   <zorder>touxiang</zorder>
-   <zorder>pushButton_5</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>pushButton_4</zorder>
   </widget>
  </widget>
  <resources/>

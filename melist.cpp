@@ -1,5 +1,5 @@
-#include "list.h"
-#include "ui_list.h"
+#include "melist.h"
+#include "ui_melist.h"
 
 #include <QString>
 #include<QToolButton>
@@ -12,11 +12,11 @@
 #include<QMessageBox>
 #include<QDebug>
 
-
-list::list(QWidget *parent) :
+melist::melist(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::list)
+    ui(new Ui::melist)
 {
+    ui->setupUi(this);
     ui->setupUi(this);
     //设置图标
         this->setWindowIcon(QIcon(":/images/cmanc.jpg"));
@@ -66,19 +66,25 @@ list::list(QWidget *parent) :
                 //弹出聊天对话框
                 //构造聊天窗口时候，告诉这个窗口他的名字，参数1 顶层方式弹出
                 //注意！widget构造函数 并没有这两个参数
-                ChatWindow * chat = new ChatWindow(0,vToolBtn[i]->text());
-                chat->setWindowTitle(vToolBtn[i]->text());
-                chat->setWindowIcon(vToolBtn[i]->icon());
-                chat->show();
-                //如何窗口关闭将标志位设置回来
-                connect(chat,&ChatWindow::closeWidget,[=](){
-                    isShow[i]=false;
-                });
+//                MainWindow * chat = new MainWindow(0,vToolBtn[i]->text());
+//                chat->setWindowTitle(vToolBtn[i]->text());
+//                chat->setWindowIcon(vToolBtn[i]->icon());
+//                chat->show();
+//                //如何窗口关闭将标志位设置回来
+//                connect(chat,&MainWindow::closeWidget,[=](){
+//                    isShow[i]=false;
+//                });
             });
         }
  }
-list::~list()
+
+melist::~melist()
 {
     delete ui;
 }
 
+//void melist::on_pushButton_3_clicked()
+//{
+//    list *list1 =new list;
+//          list1->show();
+//}

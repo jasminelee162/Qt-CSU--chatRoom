@@ -6,21 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>600</height>
+    <width>356</width>
+    <height>707</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>400</width>
-    <height>0</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>400</width>
-    <height>600</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -48,8 +36,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>400</width>
-        <height>574</height>
+        <width>356</width>
+        <height>678</height>
        </rect>
       </property>
       <attribute name="label">

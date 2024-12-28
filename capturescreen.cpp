@@ -21,15 +21,13 @@ CaptureScreen::~CaptureScreen()
 
 void CaptureScreen::initWindow()
 {
-    this->setMouseTracking(true);//鼠标跟踪
-    this->setWindowFlags(Qt::FramelessWindowHint);//无边框
+    this->setMouseTracking(true);
+    this->setWindowFlags(Qt::FramelessWindowHint);
     setWindowState(Qt::WindowActive | Qt::WindowFullScreen);
 }
 
 void CaptureScreen::loadBackgroundPixmap()
 {
-    //QWidget *widget = QApplication::activeWindow();
-    //widget->grab();
     m_loadPixmap = QPixmap::grabWindow(QApplication::desktop()->winId()); //抓取当前屏幕的图片;
     m_screenwidth = m_loadPixmap.width();
     m_screenheight = m_loadPixmap.height();
@@ -96,7 +94,7 @@ void CaptureScreen::keyPressEvent(QKeyEvent *event)
     {
         signalCompleteCature(m_capturePixmap);
         QMessageBox::warning(0,tr("提示"),
-                             tr("图片将存放在E:\\project\\_qt\\chat-room-QT-main\\chat-room-QT-main\\jietu")
+                             tr("图片将存放在C:/Users/HP/Documents/messagechat/jietu")
                              ,QMessageBox::Ok);
         close();
     }

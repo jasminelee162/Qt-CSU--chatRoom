@@ -10,15 +10,9 @@ findpwd::findpwd(QWidget *parent) :
 {
     ui->setupUi(this);
     //设置图标
-    this->setWindowIcon(QIcon(":/new/prefix1/images/face.jpg"));
+    this->setWindowIcon(QIcon(":/images/snd.jpg"));
     //设置名称
-    this->setWindowTitle("Reset");
-    //设置背景
-    QPalette palette;
-    palette.setBrush(/*QPalette::Background*/this->backgroundRole(),
-    QBrush(QPixmap(":/new/prefix1/new_image/regBg.png")));
-    this->setPalette(palette);
-
+    this->setWindowTitle("Retrieve password");
     //获取用户名输入框的数据
     QString Username = ui->idEdt->text();
     //获取用户的昵称

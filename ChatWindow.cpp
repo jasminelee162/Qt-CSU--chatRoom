@@ -9,8 +9,6 @@
 #include<QDate>
 #include<QDateTime>
 #include<QScrollBar>
-#include <QDesktopWidget>
-#include <QMovie>
 #include<QHostInfo>
 #include<QProcess>
 #include<QNetworkInterface>
@@ -18,12 +16,9 @@
 #include<QTextCharFormat>
 #include<tcpclient.h>
 #include<tcpserver.h>
-#include<QFileDialog>
 #include<QDebug>
 #include<capturescreen.h>
 #include <QTextCursor>
-#include <QTableView>
-#include <QMenu>
 
 /*
  * 使用UDP协议进行聊天
@@ -36,34 +31,11 @@ ChatWindow::ChatWindow(QWidget *parent,QString userName,User u) :
     QMainWindow(parent),
     ui(new Ui::ChatWindow)
 {
-
     //去掉边框
     // this->setWindowFlags(Qt::FramelessWindowHint|windowFlags());
     //背景透明
     this->setAttribute(Qt::WA_TranslucentBackground);
     ui->setupUi(this);
-
-    //设置外观
-    setAppearance();
-    QMenu *ChangeBackGroundMenu=new QMenu(this);
-    ChangeBackGroundMenu->addAction(action1);
-    ChangeBackGroundMenu->addAction(action2);
-    ChangeBackGroundMenu->addAction(action3);
-    ui->changeButton->setMenu(ChangeBackGroundMenu);
-    connect(action1,&QAction::triggered,this,&ChatWindow::action1_slot);
-    connect(action2,&QAction::triggered,this,&ChatWindow::action2_slot);
-    connect(action3,&QAction::triggered,this,&ChatWindow::action3_slot);
-
-    QPixmap whiteground;
-    whiteground.load(":/new/prefix1/new_image/P3.jpg");
-    whiteground = whiteground.scaled(ui->whiteGround->geometry().size());
-    ui->whiteGround->setPixmap(whiteground);
-
-    //设置背景
-//    QPalette palette;
-//    palette.setBrush(/*QPalette::Background*/this->backgroundRole(),
-//    QBrush(QPixmap(":/new/prefix1/images/XHS.jpg")));
-//    this->setPalette(palette);
 
 
     setUser(u);
@@ -71,7 +43,6 @@ ChatWindow::ChatWindow(QWidget *parent,QString userName,User u) :
     udpSocket = new QUdpSocket(this);
     uName=userName; //获取用户名
     port = 45454;   //设置端口号
-    newvoice = NULL;
     udpSocket->bind(port,QUdpSocket::ShareAddress | QUdpSocket::ReuseAddressHint); //绑定端口
     connect(udpSocket,SIGNAL(readyRead()),this,SLOT(processPendingDatagrams()));
     sendMessage(NewParticipant);
@@ -97,6 +68,7 @@ ChatWindow::ChatWindow(QWidget *parent,QString userName,User u) :
 
     qDebug()<<users.address;
     qDebug()<<"ip";
+
 
 
     connect(ui->usrTblWidget,SIGNAL(cellClicked(int,int)),this,SLOT(gettext(int ,int )));
@@ -168,39 +140,6 @@ ChatWindow::~ChatWindow()
 {
     delete ui;
 }
-
-void ChatWindow::setAppearance()
-{
-//    //重新设置窗口大小为1000*800
-//    this->resize(1000,800);
-//    //隐藏标题栏
-//    this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint);
-
-
-    //设置光标在输入框
-//    ui->msgTextEdit->setFocusPolicy(Qt::StrongFocus);
-//    ui->msgTextEdit->setFocusPolicy(Qt::NoFocus);
-//    ui->msgTextEdit->setFocus();
-
-    QPalette palette;
-        palette.setBrush(/*QPalette::Background*/this->backgroundRole(),
-        QBrush(QPixmap(":/new/prefix1/images/XHS.jpg")));
-        this->setPalette(palette);
-    //ui->stackedWidget->setStyleSheet("QStackedWidget {border-image: url(:/chat/image/background1.png);}");
-    action1=new QAction(this);
-    action2=new QAction(this);
-    action3=new QAction(this);
-    action1->setIcon(QIcon(":/chat/image/icon/icon_menu.png"));
-    action1->setText(tr("原始"));
-    action2->setIcon(QIcon(":/chat/image/icon/icon_menu.png"));
-    action2->setText(tr("款式2"));
-    action3->setIcon(QIcon(":/chat/image/icon/icon_menu.png"));
-    action3->setText(tr("自定义"));
-}
-
-
-
-
 
 void ChatWindow::mousePressEvent(QMouseEvent *event)
 {
@@ -323,7 +262,7 @@ void ChatWindow::sendMessage(MessageType type, QString serverAddress)
     case NewParticipant:
         //广播新用户加入的消息
        out << getUserName();
-       QSound::play(":/new/prefix1/friend.wav");
+       QSound::play(":/music/friend.wav");
        break;
 
     case ParticipantLeft:
@@ -385,17 +324,12 @@ void ChatWindow::hasPendingFile(QString userName, QString serverAddress,QString 
                 if(!name.isEmpty())
                 {
 
-                    tcpclient *client = new tcpclient(this);
+                    tcpclient *client = new tcpclient;
                     client->setFileName(name);
                     client->setHostAddress(QHostAddress(serverAddress));
                     qDebug()<<"弹出窗口client";
                     client->show();
                 }
-                else
-                {
-                   tcpclient  *client = new tcpclient(this);
-                   client->localFile =new  QFile(fileName);
-            }
             }
             else {
                 sendMessage(Refuse,serverAddress);
@@ -583,7 +517,7 @@ void ChatWindow::on_sendToolBtn_clicked()
     if(ui->usrTblWidget->selectedItems().isEmpty())
     {
         QMessageBox::warning(0,tr("提醒"),
-                             tr("文件将会发送给所有在线的成员!"),QMessageBox::Ok);
+                             tr("请选择群成员，文件将会发送给所有在线的成员!"),QMessageBox::Ok);
         return;
     }
     server->show();
@@ -615,177 +549,11 @@ void ChatWindow::onCompleteCature(QPixmap captureImage)
     clip->setPixmap(captureImage);
 
     QString time = QDateTime::currentDateTime().toString("yyyy_MM_dd_hh_mm_ss");
-    QString path = "E:\\project\\_qt\\chat-room-QT-main\\chat-room-QT-main\\jietu";
+    QString path = "C:/Users/HP/Documents/messagechat/jietu";
 
     captureImage.save(QString("%1/%2.jpg").arg(path,time));
 
     textEditPhotoPath = QString("%1/%2.jpg").arg(path,time);
     qDebug()<<"保存截图";
 
-}
-
-
-
-////私聊
-void ChatWindow::on_userTblWidget_doubleClicked(const QModelIndex &index)
-{
-    qDebug() << "222222222";
-    if(ui->usrTblWidget->item(index.row(),0)->text() == getUserName())
-    {
-        QMessageBox::warning(0,tr("警告"),tr("不可以和自己聊天！！！"),QMessageBox::Ok);
-        return ;
-    }
-    else
-    {
-        if(!privateChat)
-        {
-            qDebug() << "进入了";
-            privateChat = new Chat(ui->usrTblWidget->item(index.row(),1)->text(),
-                                   ui->usrTblWidget->item(index.row(),2)->text());
-            privateChat->show();
-
-        }
-          qDebug() << 1;
-        QByteArray data;
-        QDataStream out(&data,QIODevice::WriteOnly);
-        QString localHostName = QHostInfo::localHostName();
-        QString address = getIP();
-        out << Xchat << getUserName() << localHostName << address;
-        //udpSocket->writeDatagram(data,data.length(),QHostAddress::QHostAddress(ui->userTableWidget->item(index.row(),2)->text()),port);
-        udpSocket->writeDatagram(data,data.length(),QHostAddress(ui->usrTblWidget->item(index.row(),2)->text()),port);
-        privateChat->show();
-        privateChat->is_opend = true;
-       qDebug() <<  Xchat << getUserName() << localHostName << address;
-    }
-
-}
-
-void ChatWindow::showXchat(QString localHostName, QString ipAddress)
-{
-
-   /* if(!privateChat1)
-    {
-        privateChat1 = new Chat(localHostName,ipAddress);
-        privateChat1->show();
-        privateChat1->is_opend = true;
-    }
-    */
-    if(!privateChat1)
-        privateChat1 = new Chat(localHostName, ipAddress);
-    privateChat1->show();
-
-}
-
-
-void ChatWindow::on_usrTblWidget_itemDoubleClicked(QTableWidgetItem *item)
-{
-    qDebug() << "222222222";
-    if(ui->usrTblWidget->item(1,1)->text() == getUserName())
-    {
-        QMessageBox::warning(0,tr("警告"),tr("不可以和自己聊天！！！"),QMessageBox::Ok);
-        return ;
-    }
-    else
-    {
-        if(!privateChat)
-        {
-            qDebug() << "进入了";
-            privateChat = new Chat(ui->usrTblWidget->item(1,0)->text(),
-                                   ui->usrTblWidget->item(2,0)->text());
-            privateChat->show();
-
-        }
-          qDebug() << 1;
-        QByteArray data;
-        QDataStream out(&data,QIODevice::WriteOnly);
-        QString localHostName = QHostInfo::localHostName();
-        QString address = getIP();
-        out << Xchat << getUserName() << localHostName << address;
-
-        //udpSocket->writeDatagram(data,data.length(),QHostAddress::QHostAddress(ui->userTableWidget->item(index.row(),2)->text()),port);
-        udpSocket->writeDatagram(data,data.length(),QHostAddress(ui->usrTblWidget->item(2,2)->text()),port);
-
-        privateChat->show();
-        privateChat->is_opend = true;
-
-        qDebug() <<  Xchat << getUserName() << localHostName << address;
-    }
-}
-
-void ChatWindow::on_voiceButton_clicked(bool checked)
-{
-    checked = !(newvoice == NULL);
-    if(checked)
-    {
-        newvoice->close();
-        delete newvoice;
-        newvoice = NULL;
-        ui->voiceButton->setStyleSheet("QPushButton { background-color: rgb(50, 50, 50,0); border-radius: 6px; color: rgb(255, 255, 255); border-image: url(:/new/prefix1/images/icon_novoice.png);}"
-                                       "QPushButton:hover { background-color:rgba(172, 178, 148, 100)}");
-    }
-    else
-    {
-        ui->voiceButton->setStyleSheet("QPushButton { background-color: rgb(50, 50, 50,0); border-radius: 6px; color: rgb(255, 255, 255); border-image: url(:/new/prefix1/images/icon_voice.png);}"
-                                       "QPushButton:hover { background-color:rgba(172, 178, 148, 100)}");
-        newvoice = new GroupVoice(this);
-        newvoice->show();
-        newvoice->move((QApplication::desktop()->width()-newvoice->width())/3.3,(QApplication::desktop()->height()-newvoice->height())/9);
-    }
-}
-
-void ChatWindow::action1_slot()//设置菜单  添加图片
-{
-
-    QPixmap whiteground;
-    whiteground.load(":/new/prefix1/new_image/P3.jpg");
-    whiteground = whiteground.scaled(ui->whiteGround->geometry().size());
-    ui->whiteGround->setPixmap(whiteground);
-
-
-//    QPalette palette;
-//        palette.setBrush(/*QPalette::Background*/this->backgroundRole(),
-//        QBrush(QPixmap(":/new/prefix1/images/XHS.jpg")));
-//        this->setPalette(palette);
-    //ui->stackedWidget->setStyleSheet("QStackedWidget {border-image: url(:/chat/image/background1.png);}");
-
-}
-void ChatWindow::action2_slot()//设置菜单  添加图片
-{
-//    QLabel *label = new QLabel();
-//       QMovie *movie = new QMovie(":/new/prefix1/new_image/20240711102418.gif");
-//        label->setMovie(movie); // 1. 设置要显示的 GIF 动画图片
-//        movie->start();         // 2. 启动动画
-//        label->show();
-    //白色背景
-    QPixmap whiteground;
-    whiteground.load(":/new/prefix1/new_image/P2.jpg");
-    whiteground = whiteground.scaled(ui->whiteGround->geometry().size());
-    ui->whiteGround->setPixmap(whiteground);
-//    QPalette palette;
-//        palette.setBrush(/*QPalette::Background*/this->backgroundRole(),
-//        QBrush(QPixmap(":/new/prefix1/list/autumn.jpg")));
-//        this->setPalette(palette);
-
-//    ui->stackedWidget->setStyleSheet("QStackedWidget {border-image: url(:/chat/image/background2.jpg);}");
-
-}
-void ChatWindow::action3_slot()//设置菜单  添加图片
-{
-
-    QString FileName=QFileDialog::getOpenFileName(this,tr("背景"),".",tr("Image file(*.bmp *.jpg *.pbm *.pgm *.png *.ppm *.xbm *.xpm)"));
-    if(FileName!="")
-    {
-
-        QPixmap whiteground;
-        whiteground.load(FileName);
-        whiteground = whiteground.scaled(ui->whiteGround->geometry().size());
-        ui->whiteGround->setPixmap(whiteground);
-
-
-//        QPalette palette;
-//            palette.setBrush(/*QPalette::Background*/this->backgroundRole(),
-//            QBrush(QPixmap(fileName)));
-//            this->setPalette(palette);
-        //ui->stackedWidget->setStyleSheet("QStackedWidget {border-image: url("+FileName+");}");
-    }
 }

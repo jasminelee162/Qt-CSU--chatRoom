@@ -3,35 +3,23 @@
 
 #include <QMainWindow>
 #include<QUdpSocket>
-#include <QTableView>
 #include<tcpserver.h>
 #include<tcpclient.h>
-#include<chat.h>
-#include "groupvoice.h"
 #include<QClipboard>
 #include<QtMultimedia/QSound>
-#include <QTableWidgetItem>
 
 
 namespace Ui {
 class ChatWindow;
 }
 
-//enum MessageType{
-//    Message,
-//    NewParticipant,
-//    ParticipantLeft,
-//    Refuse,
-
-
-
-//};
-
 class QUdpSocket;
 class TcpServer;
 class QTextCharFormat;
 class tcpclient;
 
+
+enum MessageType{Message,NewParticipant,ParticipantLeft,FileName,Refuse};//枚举分别代表 聊天信息，新用户加入，用户退出
 
 struct User{
     QString hostaddress;
@@ -55,7 +43,6 @@ public:
 signals:
     //关闭窗口发送关闭信息
     void closeWidget();
-    //void on_usrTblWidget_itemDoubleClicked()
 protected:
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent * event);
@@ -99,28 +86,8 @@ private slots:
 
     void onCompleteCature(QPixmap captureImage);
 
-    void on_userTblWidget_doubleClicked(const QModelIndex &index);
-
-    void showXchat(QString localHostName, QString ipAddress);
-
-    //void on_usrTblWidget_itemDoubleClicked(QTableWidgetItem *item);
-
     //QString gettext(int,int);
 
-
-    //void on_usrTblWidget_itemClicked(QTableWidgetItem *item);
-
-    //void on_usrTblWidget_cellDoubleClicked(int row, int column);
-
-
-    void on_usrTblWidget_itemDoubleClicked(QTableWidgetItem *item);
-
-    void on_voiceButton_clicked(bool checked);
-
-    void action1_slot();
-
-    void action2_slot();
-    void action3_slot();
 
 private:
     Ui::ChatWindow *ui;
@@ -134,23 +101,14 @@ private:
     qint16 port;//端口
     QString uName;//用户名
     void ReceiveMessage();//接受UDP的消息
-    void setAppearance();
     QString fileName;
     QString clientname;
     tcpserver *server;
     tcpclient *client;
-    GroupVoice *newvoice;
-
-    Chat *privateChat;
-    Chat *privateChat1;
 
     User users;
 
     QString textEditPhotoPath;
-
-    QAction *action1;
-    QAction *action2;
-    QAction *action3;
 
 
 };

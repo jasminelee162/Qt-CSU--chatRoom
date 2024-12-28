@@ -1,4 +1,4 @@
-include "friendlist.h"
+#include "friendlist.h"
 #include "ui_friendlist.h"
 
 friendList::friendList(QWidget *parent) :
@@ -12,4 +12,3 @@ friendList::~friendList()
 {
     delete ui;
 }
-
